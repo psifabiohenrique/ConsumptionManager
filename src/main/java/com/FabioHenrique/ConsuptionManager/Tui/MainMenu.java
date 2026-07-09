@@ -1,24 +1,22 @@
 package com.FabioHenrique.ConsuptionManager.Tui;
 
-public class MainMenu {
-    private final InputHelper input;
+public class MainMenu extends UI {
     private final VehicleUI vehicleUI;
     private final FuelingUI fuelingUI;
-    private final AppContext context;
 
     public MainMenu(InputHelper input, VehicleUI vehicleUI, FuelingUI fuelingUI, AppContext context) {
-        this.input = input;
+        this.inputHelper = input;
         this.vehicleUI = vehicleUI;
         this.fuelingUI = fuelingUI;
-        this.context = context;
+        this.appContext = context;
     }
 
-    public void start() {
+    public void show() {
         int opcao;
 
         do {
             showHeader();
-            opcao = input.readInteger("""
+            opcao = inputHelper.readInteger("""
                     
                     1 - Gerenciar veículos
                     2 - Gerenciar abastecimentos
@@ -30,7 +28,7 @@ public class MainMenu {
 
             switch (opcao) {
                 case 1 -> // Veículos
-                    vehicleUI.showMenu();
+                    vehicleUI.show();
                 case 2 -> {
                     // Abastecimentos
                     fuelingUI.showMenu();
@@ -44,20 +42,4 @@ public class MainMenu {
         } while (opcao != 0);
     }
 
-    private void showHeader() {
-        System.out.println();
-        System.out.println("=======================");
-        try{
-            System.out.println("Veículo selecionado: " + context.getSelectedVehicle().getName());
-        } catch (Exception e){
-            System.out.println("Nenhum veículo selecionado.");
-
-        }
-        System.out.println("=======================");
-
-        System.out.println();
-        System.out.println("=======================");
-        System.out.println("CONTROLE DE ABASTECIMENTOS");
-        System.out.println("=======================");
-    }
 }

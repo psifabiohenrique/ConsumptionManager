@@ -25,6 +25,6 @@ public class Main {
 
 
         MainMenu tui = new MainMenu(input, vehicleUI, fuelingUI, appContext);
-        tui.start();
+        tui.show();
     }
 }

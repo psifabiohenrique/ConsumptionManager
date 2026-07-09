@@ -7,25 +7,24 @@ import com.FabioHenrique.ConsuptionManager.Services.dto.VehicleOutDto;
 import java.util.List;
 import java.util.Objects;
 
-public class VehicleUI {
+public class VehicleUI extends UI{
     private final VehicleService vehicleService;
-    private final InputHelper input;
-    private final AppContext context;
 
     public VehicleUI(VehicleService vehicleService, InputHelper input, AppContext context) {
         this.vehicleService = vehicleService;
-        this.input = input;
-        this.context = context;
+        this.inputHelper = input;
+        this.appContext = context;
     }
 
-    public void showMenu() {
+    public void show() {
         int option;
 
         do {
+            showHeader();
             System.out.println();
             System.out.println("====== VEÍCULOS ======");
 
-            option = input.readInteger("""
+            option = inputHelper.readInteger("""
                     
                     1 - Selecionar veículo
                     2 - Cadastrar
@@ -48,15 +47,15 @@ public class VehicleUI {
     }
 
     private void vehicleSelect() {
-        int vehicleId = input.readInteger("Entre com o ID do veículo a ser selecionado: ");
-        context.setSelectedVehicle(vehicleService.getById(vehicleId));
+        int vehicleId = inputHelper.readInteger("Entre com o ID do veículo a ser selecionado: ");
+        appContext.setSelectedVehicle(vehicleService.getById(vehicleId));
     }
 
     private void delete() {
-        int option = input.readInteger("Entre com o Id do Veículo que deseja excluir: ");
+        int option = inputHelper.readInteger("Entre com o Id do Veículo que deseja excluir: ");
         try {
             VehicleOutDto vehicleToExclude = vehicleService.getById(option);
-            String confirmName = input.readString("Reescreva o nome do veículo \"" + vehicleToExclude.getName() + "\" para confirmar a exclusão: ");
+            String confirmName = inputHelper.readString("Reescreva o nome do veículo \"" + vehicleToExclude.getName() + "\" para confirmar a exclusão: ");
             if (Objects.equals(confirmName, vehicleToExclude.getName())) {
                 vehicleService.delete(vehicleToExclude.getId());
             } else {
@@ -91,8 +90,8 @@ public class VehicleUI {
         System.out.println();
         System.out.println("=== CADASTRO DE VEÍCULO ===");
 
-        String name = input.readString("Nome: ");
-        double initialOdometer = input.readDouble("Odômetro inicial: ");
+        String name = inputHelper.readString("Nome: ");
+        double initialOdometer = inputHelper.readDouble("Odômetro inicial: ");
 
         vehicleService.create(new VehicleInDto(name, initialOdometer));
 
