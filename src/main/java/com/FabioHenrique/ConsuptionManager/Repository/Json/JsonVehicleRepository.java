@@ -82,7 +82,7 @@ public class JsonVehicleRepository implements VehicleRepository {
         }
         try {
             // No Jackson 3 usamos TypeReference para mapear listas corretamente
-            return mapper.readValue(archive, new TypeReference<List<VehicleJsonModel>>() {});
+            return mapper.readValue(archive, new TypeReference<>() {});
         } catch (JacksonException e) {
             throw new RuntimeException("Erro ao ler dados do banco de dados", e);
         }

@@ -82,7 +82,7 @@ public class JsonFuelingRepository implements FuelingRepository {
         }
 
         try {
-            return mapper.readValue(archive, new TypeReference<List<FuelingJsonModel>>() {});
+            return mapper.readValue(archive, new TypeReference<>() {});
         } catch (JacksonException e) {
             throw new RuntimeException("Erro ao ler dados do banco de dados", e);
         }

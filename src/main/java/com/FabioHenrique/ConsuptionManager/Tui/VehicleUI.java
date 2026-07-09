@@ -5,6 +5,7 @@ import com.FabioHenrique.ConsuptionManager.Services.dto.VehicleInDto;
 import com.FabioHenrique.ConsuptionManager.Services.dto.VehicleOutDto;
 
 import java.util.List;
+import java.util.Objects;
 
 public class VehicleUI {
     private final VehicleService vehicleService;
@@ -26,22 +27,20 @@ public class VehicleUI {
 
             option = input.readInteger("""
                     
-                    1 - Cadastrar
-                    2 - Listar
-                    3 - Buscar por ID
+                    1 - Selecionar veículo
+                    2 - Cadastrar
+                    3 - Listar
                     4 - Remover
-                    5 - Selecionar veículo
                     0 - voltar
                     
                     Opção:
                     """);
 
             switch (option) {
-                case 1 -> registry();
-                case 2 -> list();
-                case 3 -> search();
+                case 1 -> vehicleSelect();
+                case 2 -> registry();
+                case 3 -> list();
                 case 4 -> delete();
-                case 5 -> vehicleSelect();
                 case 0 -> {}
                 default -> System.out.println("Opção Inválida!");
             }
@@ -54,11 +53,18 @@ public class VehicleUI {
     }
 
     private void delete() {
-        System.out.println("Não implementado ainda");
-    }
-
-    private void search() {
-        System.out.println("Não implementado ainda");
+        int option = input.readInteger("Entre com o Id do Veículo que deseja excluir: ");
+        try {
+            VehicleOutDto vehicleToExclude = vehicleService.getById(option);
+            String confirmName = input.readString("Reescreva o nome do veículo \"" + vehicleToExclude.getName() + "\" para confirmar a exclusão: ");
+            if (Objects.equals(confirmName, vehicleToExclude.getName())) {
+                vehicleService.delete(vehicleToExclude.getId());
+            } else {
+                System.out.println("Os nomes não coincidem, tente novamente.");
+            }
+        } catch (RuntimeException e) {
+            System.out.println("Veículo não encontrado, informe um ID correto.");
+        }
     }
 
     private void list() {
@@ -88,7 +94,7 @@ public class VehicleUI {
         String name = input.readString("Nome: ");
         double initialOdometer = input.readDouble("Odômetro inicial: ");
 
-        VehicleOutDto vehicle = vehicleService.create(new VehicleInDto(name, initialOdometer));
+        vehicleService.create(new VehicleInDto(name, initialOdometer));
 
         System.out.println("Veículo cadastrado com sucesso");
         System.out.println();
