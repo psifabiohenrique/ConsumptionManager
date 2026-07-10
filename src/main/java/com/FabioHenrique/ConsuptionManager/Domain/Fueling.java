@@ -3,12 +3,12 @@ package com.FabioHenrique.ConsuptionManager.Domain;
 public class Fueling {
     private final int id;
     private final int vehicleId;
-    private int odometer;
+    private double odometer;
     private double liters;
     private FuelType fuelType;
     private double totalCost;
 
-    public Fueling(int id, int vehicleId, int odometer, double liters, FuelType fuelType, double totalCost) {
+    public Fueling(int id, int vehicleId, double odometer, double liters, FuelType fuelType, double totalCost) {
         this.id = id;
         this.vehicleId = vehicleId;
         this.odometer = odometer;
@@ -17,7 +17,7 @@ public class Fueling {
         this.totalCost = totalCost;
     }
 
-    public int getOdometer() {
+    public double getOdometer() {
         return odometer;
     }
 

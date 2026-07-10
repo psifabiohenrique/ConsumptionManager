@@ -6,7 +6,7 @@ import com.FabioHenrique.ConsuptionManager.Domain.Fueling;
 public class FuelingJsonModel {
     private int id;
     private int vehicleId;
-    private int odometer;
+    private double odometer;
     private double liters;
     private FuelType fuelType;
     private double totalCost;
@@ -45,11 +45,11 @@ public class FuelingJsonModel {
         this.vehicleId = vehicleId;
     }
 
-    public int getOdometer() {
+    public double getOdometer() {
         return odometer;
     }
 
-    public void setOdometer(int odometer) {
+    public void setOdometer(double odometer) {
         this.odometer = odometer;
     }
 

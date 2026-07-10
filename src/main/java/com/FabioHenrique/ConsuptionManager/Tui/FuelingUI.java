@@ -119,7 +119,7 @@ public class FuelingUI extends UI{
 
         int vehicleId = getVehicleId();
 
-        int odometer = inputHelper.readInteger("Informe o Odômetro atual: ");
+        double odometer = inputHelper.readDouble("Informe o Odômetro atual: ");
         double liters = inputHelper.readDouble("Informe quantos litros foram abastecidos: ");
         FuelType fuelType;
         int fuelOption = inputHelper.readInteger("""

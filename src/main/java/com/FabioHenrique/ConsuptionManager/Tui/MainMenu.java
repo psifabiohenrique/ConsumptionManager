@@ -3,12 +3,14 @@ package com.FabioHenrique.ConsuptionManager.Tui;
 public class MainMenu extends UI {
     private final VehicleUI vehicleUI;
     private final FuelingUI fuelingUI;
+    private final AverageConsumptionUI avgConsumptionUI;
 
-    public MainMenu(InputHelper input, VehicleUI vehicleUI, FuelingUI fuelingUI, AppContext context) {
+    public MainMenu(InputHelper input, VehicleUI vehicleUI, FuelingUI fuelingUI, AppContext context, AverageConsumptionUI avgConsumptionUI) {
         this.inputHelper = input;
         this.vehicleUI = vehicleUI;
         this.fuelingUI = fuelingUI;
         this.appContext = context;
+        this.avgConsumptionUI = avgConsumptionUI;
     }
 
     public void show() {
@@ -34,7 +36,7 @@ public class MainMenu extends UI {
                     fuelingUI.show();
                 }
                 case 3 -> {
-                    // Consumo futuro
+                    avgConsumptionUI.show();
                 }
                 case 0 -> System.out.println("Encerrando sistema...");
                 default -> System.out.println("Opção inválida.");

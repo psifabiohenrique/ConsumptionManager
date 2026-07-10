@@ -4,6 +4,7 @@ import com.FabioHenrique.ConsuptionManager.Repository.Interfaces.FuelingReposito
 import com.FabioHenrique.ConsuptionManager.Repository.Interfaces.VehicleRepository;
 import com.FabioHenrique.ConsuptionManager.Repository.Json.JsonFuelingRepository;
 import com.FabioHenrique.ConsuptionManager.Repository.Json.JsonVehicleRepository;
+import com.FabioHenrique.ConsuptionManager.Services.AverageConsumptionService;
 import com.FabioHenrique.ConsuptionManager.Services.FuelingService;
 import com.FabioHenrique.ConsuptionManager.Services.VehicleService;
 import com.FabioHenrique.ConsuptionManager.Tui.*;
@@ -23,8 +24,12 @@ public class Main {
         FuelingService fuelingService = new FuelingService(fuelingRepository);
         FuelingUI fuelingUI = new FuelingUI(fuelingService, input, appContext);
 
+        // Average Consumption
+        AverageConsumptionService avgConsumptionService = new AverageConsumptionService(fuelingService);
+        AverageConsumptionUI avgConsumption = new AverageConsumptionUI(input, appContext, avgConsumptionService);
 
-        MainMenu tui = new MainMenu(input, vehicleUI, fuelingUI, appContext);
+
+        MainMenu tui = new MainMenu(input, vehicleUI, fuelingUI, appContext, avgConsumption);
         tui.show();
     }
 }

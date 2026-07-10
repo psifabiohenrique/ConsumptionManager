@@ -4,12 +4,12 @@ import com.FabioHenrique.ConsuptionManager.Domain.FuelType;
 
 public class FuelingInDto {
     private int vehicleId;
-    private int odometer;
+    private double odometer;
     private double liters;
     private FuelType fuelType;
     private double totalCost;
 
-    public FuelingInDto(int vehicleId, int odometer, double liters, FuelType fuelType, double totalCost) {
+    public FuelingInDto(int vehicleId, double odometer, double liters, FuelType fuelType, double totalCost) {
         this.vehicleId = vehicleId;
         this.odometer = odometer;
         this.liters = liters;
@@ -25,7 +25,7 @@ public class FuelingInDto {
         this.vehicleId = vehicleId;
     }
 
-    public int getOdometer() {
+    public double getOdometer() {
         return odometer;
     }
 
