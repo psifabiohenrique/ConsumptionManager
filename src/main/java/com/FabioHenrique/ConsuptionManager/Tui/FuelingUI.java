@@ -1,32 +1,31 @@
 package com.FabioHenrique.ConsuptionManager.Tui;
 
 import com.FabioHenrique.ConsuptionManager.Domain.FuelType;
-import com.FabioHenrique.ConsuptionManager.Domain.Fueling;
 import com.FabioHenrique.ConsuptionManager.Services.FuelingService;
 import com.FabioHenrique.ConsuptionManager.Services.dto.FuelingInDto;
+import com.FabioHenrique.ConsuptionManager.Services.dto.FuelingOutDto;
 
 import java.util.List;
 
-public class FuelingUI {
+public class FuelingUI extends UI{
     private final FuelingService fuelingService;
-    private final InputHelper input;
-    private final AppContext context;
 
     public FuelingUI(FuelingService fuelingService, InputHelper input, AppContext context) {
         this.fuelingService = fuelingService;
-        this.input = input;
-        this.context = context;
+        this.inputHelper = input;
+        this.appContext = context;
     }
 
-    public void showMenu() {
+    public void show() {
         int option;
 
         do {
+            showHeader();
             System.out.println();
             System.out.println("==== ABASTECIMENTO ====");
             System.out.println();
 
-            option = input.readInteger("""
+            option = inputHelper.readInteger("""
                     1 - Cadastrar
                     2 - Listar
                     3 - Editar
@@ -61,7 +60,7 @@ public class FuelingUI {
     private void list() {
         try {
             int vehicleId = getVehicleId();
-            List<Fueling> fuelings = fuelingService.getAllByVehicle(vehicleId);
+            List<FuelingOutDto> fuelings = fuelingService.getAllByVehicle(vehicleId);
 
             if (fuelings.isEmpty()) {
                 System.out.println("Nenhum abastecimento cadastrado.");
@@ -72,10 +71,10 @@ public class FuelingUI {
             System.out.printf("%-5s %-10s %-10s %-10s %-15s %-10s%n",
                     "ID", "Veículo", "Odômetro", "Litros", "Combustível", "Custo total");
 
-            for (Fueling fueling : fuelings) {
+            for (FuelingOutDto fueling : fuelings) {
                 System.out.printf("%-5s %-10s %-10s %-10s %-15s %-10s%n",
                         fueling.getId(),
-                        context.getSelectedVehicle().getName(),
+                        appContext.getSelectedVehicle().getName(),
                         fueling.getOdometer(),
                         fueling.getLiters(),
                         fueling.getFuelType(),
@@ -88,7 +87,7 @@ public class FuelingUI {
 
     private void update() {
         try {
-            int fuelingId = input.readInteger("Entre com o ID do abastecimento a ser ALTERADO:");
+            int fuelingId = inputHelper.readInteger("Entre com o ID do abastecimento a ser ALTERADO:");
             FuelingInDto dto = fuelingInputs();
             fuelingService.update(fuelingId, dto);
             System.out.println("Abastecimento salvo com sucesso.");
@@ -99,7 +98,7 @@ public class FuelingUI {
 
     private void delete() {
         try {
-            int fuelingId = input.readInteger("Entre com o ID do abastecimento a ser EXCLUIDO:");
+            int fuelingId = inputHelper.readInteger("Entre com o ID do abastecimento a ser EXCLUIDO:");
             fuelingService.delete(fuelingId);
             System.out.println("Abastecimento excluido com sucesso.");
         } catch (Exception _) {
@@ -108,21 +107,22 @@ public class FuelingUI {
     }
     private int getVehicleId() {
         try {
-            return context.getSelectedVehicle().getId();
+            return appContext.getSelectedVehicle().getId();
         } catch (RuntimeException e) {
             System.out.println("É necessário ter um veículo selecionado.");
             throw new RuntimeException();
         }
     }
     private FuelingInDto fuelingInputs() {
+        showHeader();
         System.out.println();
 
         int vehicleId = getVehicleId();
 
-        int odometer = input.readInteger("Informe o Odômetro atual: ");
-        double liters = input.readDouble("Informe quantos litros foram abastecidos: ");
+        int odometer = inputHelper.readInteger("Informe o Odômetro atual: ");
+        double liters = inputHelper.readDouble("Informe quantos litros foram abastecidos: ");
         FuelType fuelType;
-        int fuelOption = input.readInteger("""
+        int fuelOption = inputHelper.readInteger("""
                     Informe o tipo de combustível utilizado:
                     
                     1 - Gasolina
@@ -141,7 +141,7 @@ public class FuelingUI {
                 throw new RuntimeException();
             }
         }
-        double totalCost = input.readDouble("Informe o custo total do abastecimento: ");
+        double totalCost = inputHelper.readDouble("Informe o custo total do abastecimento: ");
         return new FuelingInDto(vehicleId, odometer, liters, fuelType, totalCost);
     }
 

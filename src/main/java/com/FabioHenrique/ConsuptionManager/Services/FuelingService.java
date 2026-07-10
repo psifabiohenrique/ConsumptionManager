@@ -3,7 +3,9 @@ package com.FabioHenrique.ConsuptionManager.Services;
 import com.FabioHenrique.ConsuptionManager.Domain.Fueling;
 import com.FabioHenrique.ConsuptionManager.Repository.Interfaces.FuelingRepository;
 import com.FabioHenrique.ConsuptionManager.Services.dto.FuelingInDto;
+import com.FabioHenrique.ConsuptionManager.Services.dto.FuelingOutDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FuelingService {
@@ -13,7 +15,7 @@ public class FuelingService {
         this.fuelingRepository = fuelingRepository;
     }
 
-    public Fueling create(FuelingInDto dto) {
+    public FuelingOutDto create(FuelingInDto dto) {
 
 
         int lastId = 0;
@@ -29,22 +31,35 @@ public class FuelingService {
                 dto.getFuelType(),
                 dto.getTotalCost()
         );
-        return fuelingRepository.save(fueling);
+        return new FuelingOutDto(fuelingRepository.save(fueling));
     }
-    public Fueling getById(int fuelingId) {
-        return fuelingRepository.getOne(fuelingId);
+    public FuelingOutDto getById(int fuelingId) {
+        return new FuelingOutDto(fuelingRepository.getOne(fuelingId));
     }
-    public List<Fueling> getAll() {
-        return fuelingRepository.listAll();
+    public List<FuelingOutDto> getAll() {
+
+        List<Fueling> fuelingList = fuelingRepository.listAll();
+        List<FuelingOutDto> fuelingOutDtoList = new ArrayList<>();
+
+        for (Fueling fueling : fuelingList) {
+            fuelingOutDtoList.add(new FuelingOutDto(fueling));
+        }
+        return fuelingOutDtoList;
     }
-    public List<Fueling> getAllByVehicle(int vehicleId) {
-        List<Fueling> fuelings = fuelingRepository.listAll().stream().filter(fueling -> fueling.getVehicleId() == vehicleId).toList();
-        if (fuelings.isEmpty()) {
+    public List<FuelingOutDto> getAllByVehicle(int vehicleId) {
+        List<Fueling> fuelingList = fuelingRepository.listAll().stream().filter(fueling -> fueling.getVehicleId() == vehicleId).toList();
+        if (fuelingList.isEmpty()) {
             throw new RuntimeException("Não há abastecimentos cadastrados");
         }
-        return fuelings;
+
+        List<FuelingOutDto> fuelingOutDtoList = new ArrayList<>();
+
+        for (Fueling fueling : fuelingList) {
+            fuelingOutDtoList.add(new FuelingOutDto(fueling));
+        }
+        return fuelingOutDtoList;
     }
-    public Fueling update(int fuelingId, FuelingInDto dto) {
+    public FuelingOutDto update(int fuelingId, FuelingInDto dto) {
         Fueling udatedFueling = new Fueling(
                 fuelingId,
                 dto.getVehicleId(),
@@ -54,10 +69,10 @@ public class FuelingService {
                 dto.getTotalCost()
         );
 
-        return fuelingRepository.update(fuelingId, udatedFueling);
+        return new FuelingOutDto(fuelingRepository.update(fuelingId, udatedFueling));
     }
-    public Fueling delete(int fuelingId) {
-        Fueling fueling = getById(fuelingId);
+    public FuelingOutDto delete(int fuelingId) {
+        FuelingOutDto fueling = getById(fuelingId);
         fuelingRepository.delete(fuelingId);
         return fueling;
     }

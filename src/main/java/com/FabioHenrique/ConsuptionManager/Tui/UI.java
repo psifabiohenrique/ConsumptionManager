@@ -7,6 +7,7 @@ public abstract class UI {
     public void show(){}
 
     void showHeader() {
+        clearTerminal();
         System.out.println();
         System.out.println("=======================");
         try{
@@ -21,5 +22,10 @@ public abstract class UI {
         System.out.println("=======================");
         System.out.println("CONTROLE DE ABASTECIMENTOS");
         System.out.println("=======================");
+    }
+
+    void clearTerminal() {
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
     }
 }

@@ -31,7 +31,7 @@ public class MainMenu extends UI {
                     vehicleUI.show();
                 case 2 -> {
                     // Abastecimentos
-                    fuelingUI.showMenu();
+                    fuelingUI.show();
                 }
                 case 3 -> {
                     // Consumo futuro
