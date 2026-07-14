@@ -64,6 +64,7 @@ public class FuelingUI extends UI{
 
             if (fuelings.isEmpty()) {
                 System.out.println("Nenhum abastecimento cadastrado.");
+                inputHelper.readString("Entre com alguma letra para voltar ao menu.");
                 return;
             }
 
@@ -80,6 +81,7 @@ public class FuelingUI extends UI{
                         fueling.getFuelType(),
                         fueling.getTotalCost());
             }
+            inputHelper.readString("Insira alguma letra para voltar ao menu. ");
         } catch (Exception _) {
             System.out.println("Não há abastecimentos a serem exibidos.");
         }

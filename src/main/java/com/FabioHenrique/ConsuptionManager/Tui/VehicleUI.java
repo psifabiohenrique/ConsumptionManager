@@ -71,6 +71,7 @@ public class VehicleUI extends UI{
 
         if (vehicles.isEmpty()) {
             System.out.println("Nenhum veículo cadastrado.");
+            inputHelper.readString("Entre com alguma letra para voltar ao menu.");
             return;
         }
         System.out.println();
@@ -84,6 +85,7 @@ public class VehicleUI extends UI{
                     vehicle.getName(),
                     vehicle.getInitialOdometer());
         }
+        inputHelper.readString("Entre com alguma letra para voltar ao menu.");
     }
 
     private void registry() {
