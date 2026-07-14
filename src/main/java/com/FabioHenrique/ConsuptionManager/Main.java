@@ -10,7 +10,13 @@ import com.FabioHenrique.ConsuptionManager.Services.VehicleService;
 import com.FabioHenrique.ConsuptionManager.Tui.*;
 
 public class Main {
-    public static void main(String[] args){
+    static void main(String[] args){
+
+        MainMenu tui = getTui();
+        tui.show();
+    }
+
+    private static MainMenu getTui() {
         InputHelper input = new InputHelper();
         AppContext appContext = new AppContext();
 
@@ -29,7 +35,6 @@ public class Main {
         AverageConsumptionUI avgConsumption = new AverageConsumptionUI(input, appContext, avgConsumptionService);
 
 
-        MainMenu tui = new MainMenu(input, vehicleUI, fuelingUI, appContext, avgConsumption);
-        tui.show();
+        return new MainMenu(input, vehicleUI, fuelingUI, appContext, avgConsumption);
     }
 }
