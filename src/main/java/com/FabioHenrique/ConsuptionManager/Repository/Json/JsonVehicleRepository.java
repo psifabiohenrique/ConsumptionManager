@@ -12,7 +12,14 @@ import java.util.List;
 
 public class JsonVehicleRepository implements VehicleRepository {
     private final ObjectMapper mapper = new ObjectMapper();
-    private final File archive = new File("vehicles.json");
+    private final File archive;
+
+    public JsonVehicleRepository() {
+        this.archive = new File("vehicles.json");
+    }
+    public JsonVehicleRepository(String archiveName) {
+        this.archive = new File(archiveName);
+    }
 
     @Override
     public Vehicle save(Vehicle vehicle) {

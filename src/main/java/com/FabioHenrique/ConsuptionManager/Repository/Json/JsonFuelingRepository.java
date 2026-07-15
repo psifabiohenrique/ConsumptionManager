@@ -13,7 +13,14 @@ import java.util.List;
 public class JsonFuelingRepository implements FuelingRepository {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private final File archive = new File("fueling.json");
+    private final File archive;
+
+    public JsonFuelingRepository () {
+        this.archive = new File("fueling.json");
+    }
+    public JsonFuelingRepository (String archiveName) {
+        this.archive = new File(archiveName);
+    }
 
 
     @Override

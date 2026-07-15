@@ -49,7 +49,7 @@ public class FuelingService {
     public List<FuelingOutDto> getAllByVehicle(int vehicleId) {
         List<Fueling> fuelingList = fuelingRepository.listAll().stream().filter(fueling -> fueling.getVehicleId() == vehicleId).toList();
         if (fuelingList.isEmpty()) {
-            throw new RuntimeException("Não há abastecimentos cadastrados");
+            return new ArrayList<>();
         }
 
         List<FuelingOutDto> fuelingOutDtoList = new ArrayList<>();
