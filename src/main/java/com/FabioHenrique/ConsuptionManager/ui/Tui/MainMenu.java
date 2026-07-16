@@ -5,11 +5,11 @@ public class MainMenu extends UI {
     private final FuelingUI fuelingUI;
     private final AverageConsumptionUI avgConsumptionUI;
 
-    public MainMenu(InputHelper input, VehicleUI vehicleUI, FuelingUI fuelingUI, AppContext context, AverageConsumptionUI avgConsumptionUI) {
+    public MainMenu(InputHelper input, VehicleUI vehicleUI, FuelingUI fuelingUI, AppContextTui context, AverageConsumptionUI avgConsumptionUI) {
         this.inputHelper = input;
         this.vehicleUI = vehicleUI;
         this.fuelingUI = fuelingUI;
-        this.appContext = context;
+        this.appContextTui = context;
         this.avgConsumptionUI = avgConsumptionUI;
     }
 

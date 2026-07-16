@@ -2,7 +2,7 @@ package com.FabioHenrique.ConsuptionManager.ui.Tui;
 
 public abstract class UI {
     InputHelper inputHelper;
-    AppContext appContext;
+    AppContextTui appContextTui;
 
     public void show(){}
 
@@ -11,7 +11,7 @@ public abstract class UI {
         System.out.println();
         System.out.println("=======================");
         try{
-            System.out.println("Veículo selecionado: " + appContext.getSelectedVehicle().getName());
+            System.out.println("Veículo selecionado: " + appContextTui.getSelectedVehicle().getName());
         } catch (Exception e){
             System.out.println("Nenhum veículo selecionado.");
 

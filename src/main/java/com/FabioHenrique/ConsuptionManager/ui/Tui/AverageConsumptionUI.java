@@ -6,15 +6,15 @@ import com.FabioHenrique.ConsuptionManager.Services.dto.VehicleOutDto;
 
 public class AverageConsumptionUI extends UI {
     private final AverageConsumptionService averageConsumptionService;
-    public AverageConsumptionUI(InputHelper inputHelper, AppContext appContext, AverageConsumptionService averageConsumptionService) {
+    public AverageConsumptionUI(InputHelper inputHelper, AppContextTui appContextTui, AverageConsumptionService averageConsumptionService) {
         this.inputHelper = inputHelper;
-        this.appContext = appContext;
+        this.appContextTui = appContextTui;
         this.averageConsumptionService = averageConsumptionService;
     }
 
     @Override
     public void show() {
-        VehicleOutDto vehicle = appContext.getSelectedVehicle();
+        VehicleOutDto vehicle = appContextTui.getSelectedVehicle();
         if (vehicle == null) {
             System.out.println("É necessário selecionar algum veículo.");
             return;

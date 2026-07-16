@@ -10,10 +10,10 @@ import java.util.Objects;
 public class VehicleUI extends UI{
     private final VehicleService vehicleService;
 
-    public VehicleUI(VehicleService vehicleService, InputHelper input, AppContext context) {
+    public VehicleUI(VehicleService vehicleService, InputHelper input, AppContextTui context) {
         this.vehicleService = vehicleService;
         this.inputHelper = input;
-        this.appContext = context;
+        this.appContextTui = context;
     }
 
     public void show() {
@@ -48,7 +48,7 @@ public class VehicleUI extends UI{
 
     private void vehicleSelect() {
         int vehicleId = inputHelper.readInteger("Entre com o ID do veículo a ser selecionado: ");
-        appContext.setSelectedVehicle(vehicleService.getById(vehicleId));
+        appContextTui.setSelectedVehicle(vehicleService.getById(vehicleId));
     }
 
     private void delete() {

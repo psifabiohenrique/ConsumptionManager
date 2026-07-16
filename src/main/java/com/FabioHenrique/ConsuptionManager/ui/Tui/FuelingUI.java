@@ -10,10 +10,10 @@ import java.util.List;
 public class FuelingUI extends UI{
     private final FuelingService fuelingService;
 
-    public FuelingUI(FuelingService fuelingService, InputHelper input, AppContext context) {
+    public FuelingUI(FuelingService fuelingService, InputHelper input, AppContextTui context) {
         this.fuelingService = fuelingService;
         this.inputHelper = input;
-        this.appContext = context;
+        this.appContextTui = context;
     }
 
     public void show() {
@@ -75,7 +75,7 @@ public class FuelingUI extends UI{
             for (FuelingOutDto fueling : fuelings) {
                 System.out.printf("%-5s %-10s %-10s %-10s %-15s %-10s%n",
                         fueling.getId(),
-                        appContext.getSelectedVehicle().getName(),
+                        appContextTui.getSelectedVehicle().getName(),
                         fueling.getOdometer(),
                         fueling.getLiters(),
                         fueling.getFuelType(),
@@ -109,7 +109,7 @@ public class FuelingUI extends UI{
     }
     private int getVehicleId() {
         try {
-            return appContext.getSelectedVehicle().getId();
+            return appContextTui.getSelectedVehicle().getId();
         } catch (RuntimeException e) {
             System.out.println("É necessário ter um veículo selecionado.");
             throw new RuntimeException();

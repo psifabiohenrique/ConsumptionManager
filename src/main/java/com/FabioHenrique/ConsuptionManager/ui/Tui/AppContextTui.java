@@ -3,7 +3,7 @@ package com.FabioHenrique.ConsuptionManager.ui.Tui;
 
 import com.FabioHenrique.ConsuptionManager.Services.dto.VehicleOutDto;
 
-public class AppContext {
+public class AppContextTui {
     private VehicleOutDto selectedVehicle;
 
     public VehicleOutDto getSelectedVehicle() {
