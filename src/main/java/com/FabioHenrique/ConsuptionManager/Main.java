@@ -7,7 +7,7 @@ import com.FabioHenrique.ConsuptionManager.Repository.Json.JsonVehicleRepository
 import com.FabioHenrique.ConsuptionManager.Services.AverageConsumptionService;
 import com.FabioHenrique.ConsuptionManager.Services.FuelingService;
 import com.FabioHenrique.ConsuptionManager.Services.VehicleService;
-import com.FabioHenrique.ConsuptionManager.Tui.*;
+import com.FabioHenrique.ConsuptionManager.ui.Tui.*;
 
 public class Main {
     static void main(String[] args){

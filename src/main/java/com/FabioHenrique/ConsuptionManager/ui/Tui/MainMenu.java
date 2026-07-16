@@ -1,4 +1,4 @@
-package com.FabioHenrique.ConsuptionManager.Tui;
+package com.FabioHenrique.ConsuptionManager.ui.Tui;
 
 public class MainMenu extends UI {
     private final VehicleUI vehicleUI;

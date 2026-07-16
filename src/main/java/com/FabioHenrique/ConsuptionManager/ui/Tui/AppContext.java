@@ -1,4 +1,4 @@
-package com.FabioHenrique.ConsuptionManager.Tui;
+package com.FabioHenrique.ConsuptionManager.ui.Tui;
 
 
 import com.FabioHenrique.ConsuptionManager.Services.dto.VehicleOutDto;

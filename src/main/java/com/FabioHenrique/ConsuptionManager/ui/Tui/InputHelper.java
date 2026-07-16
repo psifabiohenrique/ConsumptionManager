@@ -1,4 +1,4 @@
-package com.FabioHenrique.ConsuptionManager.Tui;
+package com.FabioHenrique.ConsuptionManager.ui.Tui;
 
 import java.util.Scanner;
 
