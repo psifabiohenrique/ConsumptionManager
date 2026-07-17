@@ -69,6 +69,11 @@ public class VehicleDialog extends JDialog {
                 );
             }
             dispose();
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Verifique se você realmente colocou valores numéricos separando os decimais por ponto."
+            );
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(
                     this,

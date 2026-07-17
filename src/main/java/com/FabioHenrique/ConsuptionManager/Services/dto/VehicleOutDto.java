@@ -38,4 +38,9 @@ public class VehicleOutDto {
     public void setInitialOdometer(double initialOdometer) {
         this.initialOdometer = initialOdometer;
     }
+
+    @Override
+    public String toString() {
+        return this.id + " " + this.name;
+    }
 }

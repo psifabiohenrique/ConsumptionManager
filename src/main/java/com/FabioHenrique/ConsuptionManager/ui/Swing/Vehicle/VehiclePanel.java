@@ -31,7 +31,12 @@ public class VehiclePanel extends JPanel {
         buttonsPanel.add(editBtn);
         buttonsPanel.add(excludeBtn);
 
-        model = new DefaultTableModel();
+        model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         model.addColumn("ID");
         model.addColumn("Nome");
         model.addColumn("Odômetro Inicial");
