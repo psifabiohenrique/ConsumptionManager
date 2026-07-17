@@ -34,7 +34,7 @@ public class Main {
         // Average Consumption
         AverageConsumptionService avgConsumptionService = new AverageConsumptionService(fuelingService);
 
-        AppContextGui appContextGui = new AppContextGui(vehicleService, fuelingService);
+        AppContextGui appContextGui = new AppContextGui(vehicleService, fuelingService, avgConsumptionService);
 
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame(appContextGui);
